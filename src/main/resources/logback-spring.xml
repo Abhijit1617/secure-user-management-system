@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--
+        Pulls in Spring Boot's own base property definitions (log level
+        colors, the default console pattern, charset handling, and the
+        conditional structured-JSON encoder driven by
+        logging.structured.format.console). Extending these standard
+        includes rather than redefining appenders from scratch is the
+        approach Spring Boot's own reference documentation recommends,
+        and keeps the console output identical to what the project
+        already had before this file existed - both application.yml's
+        logging.pattern.console (dev) and logging.structured.format.console
+        (prod, ECS-format JSON) keep working unchanged.
+    -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-logs}/backend-control-plane.log}"/>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!--
+        Production also writes to a rolling file, in addition to console
+        output (which container log drivers/Docker capture regardless).
+        Size- and time-based rollover is configured entirely through the
+        standard logging.logback.rollingpolicy.* properties in
+        application-prod.yml, read automatically by Boot's own
+        file-appender.xml include - no policy is hard-coded here.
+    -->
+    <springProfile name="prod">
+        <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <!-- Fallback for any profile other than dev/prod (e.g. running tests locally without -Dspring.profiles.active). -->
+    <springProfile name="!dev &amp; !prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+</configuration>
