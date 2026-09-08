@@ -43,6 +43,8 @@ public final class SecurityConstants {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/actuator/health",
+            "/actuator/health/liveness",
+            "/actuator/health/readiness",
             "/actuator/info"
     };
 }
