@@ -163,13 +163,12 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD must be set - see .env.example}
       GF_USERS_ALLOW_SIGN_UP: "false"
     volumes:
-      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
-      - cp-grafana-data:/var/lib/grafana
+        - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+        - cp-grafana-data:/var/lib/grafana
     ports:
       - "3001:3000"
     networks:
       - cp-network
-
 volumes:
   cp-postgres-data:
   cp-redis-data:

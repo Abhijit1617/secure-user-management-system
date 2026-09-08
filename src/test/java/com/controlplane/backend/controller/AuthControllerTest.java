@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -56,13 +55,16 @@ class AuthControllerTest {
                 .build();
 
         when(authService.register(any(RegisterRequest.class)))
-                .thenReturn(MessageResponse.of("Registration successful. Please check your email."));
+                .thenReturn(MessageResponse.of(
+                        "Registration successful. Please check your email."
+                ));
 
         mockMvc.perform(post("/api/v1/auth/register")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.message").value("Registration successful. Please check your email."));
+                .andExpect(jsonPath("$.message")
+                        .value("Registration successful. Please check your email."));
     }
 
     @Test

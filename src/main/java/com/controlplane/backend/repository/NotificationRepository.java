@@ -16,7 +16,8 @@ public interface NotificationRepository extends JpaRepository<Notification, UUID
 
     Page<Notification> findByRecipientOrderByCreatedAtDesc(
             User recipient,
-            Pageable pageable);
+            Pageable pageable
+    );
 
     long countByRecipientAndReadFalse(User recipient);
 
@@ -30,5 +31,6 @@ public interface NotificationRepository extends JpaRepository<Notification, UUID
             """)
     int markAllAsRead(
             @Param("recipient") User recipient,
-            @Param("readAt") Instant readAt);
+            @Param("readAt") Instant readAt
+    );
 }
