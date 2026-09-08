@@ -1,0 +1,49 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### VS Code ###
+.vscode/
+
+### Environment ###
+.env
+.env.local
+*.env
+
+### Logs ###
+logs/
+*.log
+
+### Runtime file storage (local dev default: app.storage.base-path=./storage) ###
+/storage/
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Misc ###
+*.pid
+*.seed
+*.pid.lock
+
+### Debug / temporary files ###
+*-error.txt
+*-debug.txt

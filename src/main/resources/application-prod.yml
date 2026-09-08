@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+logging:
+  level:
+    root: WARN
+    com.controlplane.backend: INFO
+  structured:
+    format:
+      console: ecs
+  file:
+    name: logs/backend-control-plane.log
+  logback:
+    rollingpolicy:
+      max-file-size: 50MB
+      max-history: 14
+      total-size-cap: 1GB
+
+server:
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
