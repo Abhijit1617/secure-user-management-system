@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Async
     public void sendVerificationEmail(String toEmail, String recipientName, String verificationToken) {
-        String link = frontendUrl + "/verify-email?token=" + verificationToken;
+        String link = frontendUrl + "/api/v1/auth/verify-email?token=" + verificationToken;
         String body = """
                 Hi %s,
 
