@@ -26,10 +26,10 @@ jobs:
             --instance-ids i-02a2930d909b760bd \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
-              "cd ~/secure-user-management-system",
-              "git pull origin main",
-              "sudo docker compose build backend",
-              "sudo docker compose up -d --force-recreate backend"
+              "cd /home/ssm-user/secure-user-management-system",
+              "sudo -u ssm-user git -C /home/ssm-user/secure-user-management-system pull origin main",
+              "sudo docker compose -f /home/ssm-user/secure-user-management-system/docker-compose.yml build backend",
+              "sudo docker compose -f /home/ssm-user/secure-user-management-system/docker-compose.yml up -d --force-recreate backend"
             ]' \
             --comment "GitHub Actions deployment" \
             --query "Command.CommandId" \
